@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <link rel="shortcut icon" href="#">
+        
+    </head>
+<script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 vPosition;
+    attribute vec4 vColor;
+    attribute vec2 vTexCoord;
+    varying vec4 fColor;
+    varying vec2 fTexCoord;
+
+    void main() {
+        fColor = vColor;
+        fTexCoord = vTexCoord;
+        gl_Position = vPosition;
+    }
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+    varying vec4 fColor;
+    varying vec2 fTexCoord;
+    uniform sampler2D texture;
+
+    void main() {
+      //gl_FragColor = vec4(1.0, 0.0, 0.0, 0.5);
+      gl_FragColor = texture2D(texture, fTexCoord);
+    }
+</script>
+
+<script src="./Common/webgl-utils.js"></script>
+<script src="./Common/initShaders.js"></script>
+<script src="./Common/MV.js"></script>
+<script src="./tetris.js"></script>
+
+
+<body>
+    <p>Score: <span id="score">0</span></p>
+<canvas id="gl-canvas" width="240", height="480">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+<img id="texImage" src="./blocks.png" hidden="" crossorigin="">
+<br/>
+
+</body>
+</html>
